@@ -11,6 +11,21 @@
                 <page string="POS Role">
                     <group>
                         <field name="pos_role"/>
+                        <div class="oe_edit_only" attrs="{'invisible': [('pos_role', '!=', 'admin')]}">
+                            <p class="text-info">
+                                Admin role allows creating sales, processing POS orders, and collecting cash payments.
+                            </p>
+                        </div>
+                        <div class="oe_edit_only" attrs="{'invisible': [('pos_role', '!=', 'salesman')]}">
+                            <p class="text-warning">
+                                Salesman role: You can only create sales orders. Cash collection is restricted.
+                            </p>
+                        </div>
+                        <div class="oe_edit_only" attrs="{'invisible': [('pos_role', '!=', 'cashier')]}">
+                            <p class="text-warning">
+                                Cashier role: You can process payments but cash collection is restricted.
+                            </p>
+                        </div>
                     </group>
                 </page>
             </xpath>

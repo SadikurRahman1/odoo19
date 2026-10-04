@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <!-- ========================================================= -->
+    <!-- Student List View -->
+    <!-- ========================================================= -->
+
+    <record id="student_management_list" model="ir.ui.view">
+        <field name="name">student.management.list</field>
+        <field name="model">student_management.student</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="student_id"/>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="department_code"/>
+                <field name="program_code"/>
+                <field name="batch_code"/>
+                <field name="semester"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ========================================================= -->
+    <!-- Student Form View -->
+    <!-- ========================================================= -->
+
+    <record id="student_management_form" model="ir.ui.view">
+        <field name="name">student.management.form</field>
+        <field name="model">student_management.student</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <!-- ================================================= -->
+                    <!-- Student Photo -->
+                    <!-- ================================================= -->
+
+                    <field
+                        name="photo"
+                        widget="image"
+                        class="oe_avatar"
+                    />
+
+
+                    <!-- ================================================= -->
+                    <!-- Basic Information -->
+                    <!-- ================================================= -->
+
+                    <group string="Basic Information">
+
+                        <group>
+
+                            <field
+                                name="student_id"
+                                placeholder="e.g. STU-2026-001"
+                            />
+
+                            <field
+                                name="name"
+                                placeholder="Enter student full name"
+                            />
+
+                            <field
+                                name="email"
+                                placeholder="e.g. student@example.com"
+                            />
+
+                            <field
+                                name="phone"
+                                placeholder="e.g. 017XXXXXXXX"
+                            />
+
+                        </group>
+
+                        <group>
+
+                            <field name="status"/>
+
+                            <field name="active"/>
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ================================================= -->
+                    <!-- Personal Information -->
+                    <!-- ================================================= -->
+
+                    <group string="Personal Information">
+
+                        <group>
+
+                            <field
+                                name="date_of_birth"
+                                placeholder="YYYY-MM-DD"
+                            />
+
+                            <field
+                                name="age"
+                                readonly="1"
+                                placeholder="Automatically calculated"
+                            />
+
+                            <field name="gender"/>
+
+                            <field name="blood_group"/>
+
+                        </group>
+
+                        <group>
+
+                            <field
+                                name="address"
+                                placeholder="Enter full address"
+                            />
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ================================================= -->
+                    <!-- Academic Information -->
+                    <!-- ================================================= -->
+
+                    <group string="Academic Information">
+
+                        <group>
+
+                            <field name="department_id"/>
+
+                            <field name="program_id"/>
+
+                            <field name="batch_id"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="semester"/>
+
+                            <field
+                                name="admission_date"
+                                placeholder="YYYY-MM-DD"
+                            />
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ================================================= -->
+                    <!-- Guardian Information -->
+                    <!-- ================================================= -->
+
+                    <group string="Guardian Information">
+
+                        <group>
+
+                            <field
+                                name="guardian_name"
+                                placeholder="Enter guardian full name"
+                            />
+
+                            <field name="guardian_relation"/>
+
+                            <field
+                                name="guardian_phone"
+                                placeholder="e.g. 018XXXXXXXX"
+                            />
+
+                        </group>
+
+                    </group>
+
+                </sheet>
+
+            </form>
+
+        </field>
+
+    </record>
+
+
+    <!-- ========================================================= -->
+    <!-- Student Action -->
+    <!-- ========================================================= -->
+
+    <record
+        id="student_management_action"
+        model="ir.actions.act_window"
+    >
+
+        <field name="name">Students</field>
+
+        <field name="res_model">student_management.student</field>
+
+        <field name="view_mode">list,form</field>
+
+    </record>
+
+</odoo>

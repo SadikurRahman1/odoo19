@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
+    <!-- POS Admin Group -->
+    <record id="group_pos_admin" model="res.groups">
+        <field name="name">POS Admin</field>
+        <field name="category_id" ref="base.module_category_sales_management"/>
+        <field name="implied_ids" eval="[(4, ref('point_of_sale.group_pos_manager'))]"/>
+    </record>
+
     <!-- POS Salesman Group -->
     <record id="group_pos_salesman" model="res.groups">
         <field name="name">POS Salesman</field>

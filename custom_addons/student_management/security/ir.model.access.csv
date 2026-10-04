@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student_user,Student User,model_student_management_student,base.group_user,1,1,1,1
+access_department_user,Department User,model_student_management_department,base.group_user,1,1,1,1
+access_program_user,Program User,model_student_management_program,base.group_user,1,1,1,1
+access_batch_user,Batch User,model_student_management_batch,base.group_user,1,1,1,1

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <!-- ========================================================= -->
+    <!-- Main Menu -->
+    <!-- ========================================================= -->
+
+    <menuitem
+        id="menu_root"
+        name="EDUMS"
+        sequence="0"
+    />
+
+
+    <!-- ========================================================= -->
+    <!-- Academic Setup -->
+    <!-- ========================================================= -->
+
+    <menuitem
+        id="menu_academic"
+        name="Academic"
+        parent="menu_root"
+        sequence="1"
+    />
+
+
+    <menuitem
+        id="menu_department"
+        name="Departments"
+        parent="menu_academic"
+        action="department_action"
+        sequence="1"
+    />
+
+
+    <menuitem
+        id="menu_program"
+        name="Programs"
+        parent="menu_academic"
+        action="program_action"
+        sequence="2"
+    />
+
+
+    <menuitem
+        id="menu_batch"
+        name="Batches"
+        parent="menu_academic"
+        action="batch_action"
+        sequence="3"
+    />
+
+
+    <!-- ========================================================= -->
+    <!-- Students -->
+    <!-- ========================================================= -->
+
+    <menuitem
+        id="menu_students"
+        name="Students"
+        parent="menu_root"
+        action="student_management_action"
+        sequence="2"
+    />
+
+</odoo>

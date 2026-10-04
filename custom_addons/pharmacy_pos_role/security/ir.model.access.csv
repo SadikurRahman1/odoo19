@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pos_order_admin,pos.order.admin,model_pos_order,pharmacy_pos_role.group_pos_admin,1,1,1,1
+access_pos_payment_admin,pos.payment.admin,model_pos_payment,pharmacy_pos_role.group_pos_admin,1,1,1,1
+access_pos_payment_method_admin,pos.payment.method.admin,model_pos_payment_method,pharmacy_pos_role.group_pos_admin,1,1,1,1
