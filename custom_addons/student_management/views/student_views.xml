@@ -2,206 +2,132 @@
 
 <odoo>
 
-    <!-- ========================================================= -->
     <!-- Student List View -->
-    <!-- ========================================================= -->
-
     <record id="student_management_list" model="ir.ui.view">
         <field name="name">student.management.list</field>
         <field name="model">student_management.student</field>
         <field name="arch" type="xml">
             <list>
-                <field name="student_id"/>
-                <field name="name"/>
-                <field name="email"/>
-                <field name="phone"/>
-                <field name="department_code"/>
-                <field name="program_code"/>
-                <field name="batch_code"/>
-                <field name="semester"/>
-                <field name="status"/>
+                <field name="student_id" />
+                <field name="name" />
+                <field name="email" />
+                <field name="phone" />
+                <field name="department_code" />
+                <field name="program_code" />
+                <field name="batch_code" />
+                <field name="semester" />
+                <field name="status"
+                    widget="badge"
+                    decoration-success="state == 'complete' and status == 'active'" />
             </list>
         </field>
     </record>
 
-    <!-- ========================================================= -->
     <!-- Student Form View -->
-    <!-- ========================================================= -->
-
     <record id="student_management_form" model="ir.ui.view">
         <field name="name">student.management.form</field>
         <field name="model">student_management.student</field>
         <field name="arch" type="xml">
             <form>
+
+                <header>
+                    <button name="action_complete"
+                        string="Mark as Complete"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state == 'complete'" />
+
+                    <button name="action_reset_to_draft"
+                        string="Reset to Draft"
+                        type="object"
+                        class="btn-secondary"
+                        invisible="state == 'draft'" />
+
+                    <field name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,complete" />
+                </header>
                 <sheet>
 
-                    <!-- ================================================= -->
-                    <!-- Student Photo -->
-                    <!-- ================================================= -->
-
-                    <field
-                        name="photo"
+                    <field name="photo"
                         widget="image"
-                        class="oe_avatar"
-                    />
-
-
-                    <!-- ================================================= -->
-                    <!-- Basic Information -->
-                    <!-- ================================================= -->
+                        class="oe_avatar" />
 
                     <group string="Basic Information">
-
                         <group>
-
-                            <field
-                                name="student_id"
-                                placeholder="e.g. STU-2026-001"
-                            />
-
-                            <field
-                                name="name"
-                                placeholder="Enter student full name"
-                            />
-
-                            <field
-                                name="email"
-                                placeholder="e.g. student@example.com"
-                            />
-
-                            <field
-                                name="phone"
-                                placeholder="e.g. 017XXXXXXXX"
-                            />
-
+                            <field name="student_id"
+                                placeholder="e.g. STU-2026-001" />
+                            <field name="name"
+                                placeholder="Enter student full name" />
+                            <field name="email"
+                                placeholder="e.g. student@example.com" />
+                            <field name="phone"
+                                placeholder="e.g. 017XXXXXXXX" />
                         </group>
-
                         <group>
-
-                            <field name="status"/>
-
-                            <field name="active"/>
-
+                            <field name="status" />
+                            <field name="active" />
                         </group>
-
                     </group>
-
-
-                    <!-- ================================================= -->
-                    <!-- Personal Information -->
-                    <!-- ================================================= -->
 
                     <group string="Personal Information">
-
                         <group>
-
-                            <field
-                                name="date_of_birth"
-                                placeholder="YYYY-MM-DD"
-                            />
-
-                            <field
-                                name="age"
-                                readonly="1"
-                                placeholder="Automatically calculated"
-                            />
-
-                            <field name="gender"/>
-
-                            <field name="blood_group"/>
-
+                            <field name="date_of_birth"
+                                placeholder="YYYY-MM-DD" />
+                            <field name="age" readonly="1" />
+                            <field name="gender" />
+                            <field name="blood_group" />
                         </group>
-
                         <group>
-
-                            <field
-                                name="address"
-                                placeholder="Enter full address"
-                            />
-
+                            <field name="address"
+                                placeholder="Enter full address" />
                         </group>
-
                     </group>
-
-
-                    <!-- ================================================= -->
-                    <!-- Academic Information -->
-                    <!-- ================================================= -->
 
                     <group string="Academic Information">
-
                         <group>
-
-                            <field name="department_id"/>
-
-                            <field name="program_id"/>
-
-                            <field name="batch_id"/>
-
+                            <field name="department_id" />
+                            <field name="program_id" />
+                            <field name="batch_id" />
                         </group>
-
                         <group>
-
-                            <field name="semester"/>
-
-                            <field
-                                name="admission_date"
-                                placeholder="YYYY-MM-DD"
-                            />
-
+                            <field name="semester" />
+                            <field name="admission_date"
+                                placeholder="YYYY-MM-DD" />
                         </group>
-
                     </group>
 
-
-                    <!-- ================================================= -->
-                    <!-- Guardian Information -->
-                    <!-- ================================================= -->
-
                     <group string="Guardian Information">
+                        <field name="guardian_name"
+                            placeholder="Enter guardian full name" />
+                        <field name="guardian_relation" />
+                        <field name="guardian_phone"
+                            placeholder="e.g. 018XXXXXXXX" />
+                    </group>
 
-                        <group>
-
-                            <field
-                                name="guardian_name"
-                                placeholder="Enter guardian full name"
-                            />
-
-                            <field name="guardian_relation"/>
-
-                            <field
-                                name="guardian_phone"
-                                placeholder="e.g. 018XXXXXXXX"
-                            />
-
-                        </group>
-
+                    <group string="Notes">
+                        <field name="note"
+                            placeholder="Add any additional notes..." />
                     </group>
 
                 </sheet>
+                <chatter>
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </chatter>
+
 
             </form>
-
         </field>
-
     </record>
 
-
-    <!-- ========================================================= -->
     <!-- Student Action -->
-    <!-- ========================================================= -->
-
-    <record
-        id="student_management_action"
-        model="ir.actions.act_window"
-    >
-
+    <record id="student_management_action"
+        model="ir.actions.act_window">
         <field name="name">Students</field>
-
         <field name="res_model">student_management.student</field>
-
         <field name="view_mode">list,form</field>
-
     </record>
 
 </odoo>

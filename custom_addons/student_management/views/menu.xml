@@ -12,6 +12,18 @@
         sequence="0"
     />
 
+    <!-- ========================================================= -->
+    <!-- Students -->
+    <!-- ========================================================= -->
+
+    <menuitem
+        id="menu_students"
+        name="Students"
+        parent="menu_root"
+        action="student_management_action"
+        sequence="1"
+    />
+
 
     <!-- ========================================================= -->
     <!-- Academic Setup -->
@@ -21,7 +33,7 @@
         id="menu_academic"
         name="Academic"
         parent="menu_root"
-        sequence="1"
+        sequence="2"
     />
 
 
@@ -52,16 +64,5 @@
     />
 
 
-    <!-- ========================================================= -->
-    <!-- Students -->
-    <!-- ========================================================= -->
-
-    <menuitem
-        id="menu_students"
-        name="Students"
-        parent="menu_root"
-        action="student_management_action"
-        sequence="2"
-    />
-
+    
 </odoo>

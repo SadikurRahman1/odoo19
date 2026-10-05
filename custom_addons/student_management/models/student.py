@@ -6,6 +6,7 @@ from odoo.exceptions import ValidationError
 class Student(models.Model):
 
     _name = 'student_management.student'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Student'
     _order = 'name'
     _rec_name = 'name'
@@ -16,25 +17,30 @@ class Student(models.Model):
 
     name = fields.Char(
         string="Full Name",
-        required=True
+        required=True,
+        tracking=True
     )
 
     student_id = fields.Char(
         string="Student ID",
         required=True,
-        copy=False
+        copy=False,
+        tracking=True
     )
 
     photo = fields.Image(
-        string="Photo"
+        string="Photo",
+        tracking=True
     )
 
     email = fields.Char(
-        string="Email"
+        string="Email",
+        tracking=True
     )
 
     phone = fields.Char(
-        string="Phone"
+        string="Phone",
+        tracking=True
     )
 
     # =========================================================
@@ -42,7 +48,8 @@ class Student(models.Model):
     # =========================================================
 
     date_of_birth = fields.Date(
-        string="Date of Birth"
+        string="Date of Birth",
+        tracking=True
     )
 
     age = fields.Integer(
@@ -58,7 +65,8 @@ class Student(models.Model):
             ('female', 'Female'),
             ('other', 'Other'),
         ],
-        string="Gender"
+        string="Gender",
+        tracking=True
     )
 
     blood_group = fields.Selection(
@@ -72,11 +80,13 @@ class Student(models.Model):
             ('ab+', 'AB+'),
             ('ab-', 'AB-'),
         ],
-        string="Blood Group"
+        string="Blood Group",
+        tracking=True
     )
 
     address = fields.Text(
-        string="Address"
+        string="Address",
+        tracking=True
     )
 
     # =========================================================
@@ -161,9 +171,22 @@ class Student(models.Model):
         string="Guardian Relation"
     )
 
+    note = fields.Text(string="Notes")
+    
     # =========================================================
     # Student Status
     # =========================================================
+    
+    state = fields.Selection(
+        [
+            ('draft', 'Draft'),
+            ('complete', 'Complete'),
+        ],
+        string="Stage",
+        default="draft",
+        required=True,
+        tracking=True
+)
 
     status = fields.Selection(
         [
@@ -255,3 +278,37 @@ class Student(models.Model):
                     "Student age cannot be more than 60 years."
                 )
 
+    def action_complete(self):
+        for student in self:
+
+            if not student.name:
+                raise ValidationError(
+                    "Student Name is required."
+                )
+
+            if not student.student_id:
+                raise ValidationError(
+                    "Student ID is required."
+                )
+
+            if not student.department_id:
+                raise ValidationError(
+                    "Department is required."
+                )
+
+            if not student.program_id:
+                raise ValidationError(
+                    "Program is required."
+                )
+
+            if not student.batch_id:
+                raise ValidationError(
+                    "Batch is required."
+                )
+
+            student.state = 'complete'
+
+
+    def action_reset_to_draft(self):
+        for student in self:
+            student.state = 'draft'
